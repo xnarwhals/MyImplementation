@@ -1,0 +1,115 @@
+Practice Writting Sorting Algorithms from Memory
+
+int a[] = {4, 2, 12, 48, 21, 84, 1, 12, 9, 55, 22, 48};
+Int I      0  1   2   3   4   5  6   7  8  9   10  11
+int len = 12;
+----------------Insertion Sort Ref----------------
+
+void insertionSort(int a[], int len) {
+    for (int i = 1; i < len; i++) {
+        int key = a[i];
+        int j = i - 1;
+
+        while (j >= 0 && a[j] > key) { // Shift elements to the right as long as they are smaller than the key 
+            a[j + 1] = a[j]; // The shift 
+            j--;
+        }
+        a[j + 1] = key; // Place the key in its rightful spot 
+    }
+}
+----------------Merge Sort Ref----------------
+
+void mergeSort(int a[], int len) {
+    mergeSortRecursive(a, 0, len - 1);
+}
+
+void mergeSortRecursive(int a[], int l, int r) {
+
+    if (l < r) {
+        int m = l + (r - l) / 2;
+        mergeSortRecursive(a, l, m); // sort the left subarray
+        mergeSortRecursive(a, m + 1, r); // sort the right subarray 
+
+        mergeSortedArrays(a, l, m, r);
+    }
+}
+
+mergeSortedArrays(int a[], int l, int m, int r) {
+    // Determine subArray length 
+    int leftSubArrayLen = m - l + 1;
+    int rightSubArrayLen = r - m;
+
+    // Make the subArray
+    int leftSubArray[leftSubArrayLen]; 
+    int rightSubArray[rightSubArrayLen];
+
+    // populate the subArray 
+    for (int i = 0; i < leftSubArrayLen; i++) {
+        leftSubArray[i] = a[l + i];
+    }
+
+    for (int i = 0; i < rightSubArrayLen; i++) {
+        rightSubArray[i] = a[m + 1 + i]; // we add one because the other array ends at index m
+    }
+
+    int i = 0;
+    int j = 0;
+    int k = l; // track of our position in a[]
+
+    // Base handle case 
+    while (i < leftSubArrayLen && j < rightSubArrayLen) {
+        if (leftSubArray[i] <= rightSubArray[j]) {
+            a[k] = leftSubArray[i];
+            i++;
+        } else {
+            a[k] = rightSubArray[j]
+            j++;
+        }
+        k++;
+    }
+
+    // The case in which the j has reached its final value
+    while (i < leftSubArrayLen) {
+        a[k] = leftSubArray[i];
+        i++;
+        k++;
+    }
+
+    // The case in which the i has reached its final value
+    while (j < rightSubArrayLen) {
+        a[k] = rightSubArray[j];
+        j++;
+        k++;
+    }
+}
+
+----------------Quick Sort Ref----------------
+void quickSort(int a[], int l, int r) {
+    if (l < r) {
+        int q = partition(a, l, r); //Piviot is A[q]
+        quickSort(a, l, q - 1); // Sort low side
+        quickSort(a, q + 1, r); // Sort high side
+    }
+}
+
+int partition(int a[], int l, int r) {
+    int x = a[r]; // piviot 
+    int i = l - 1; // highest index on low side 
+
+    for (int j = l; j < (r - 1); j++) { // process every element except the piviot
+        if (a[j] <= x) { // element belong in low side?
+            i++; // index of new slot in low side
+            a[i] = a[j];
+        }
+    }
+    a[i + 1] = a[r]; // piviot goes to right slot of low side
+    return i + 1; // New piviot index
+}
+
+----------------Selection Sort Ref----------------
+void selectionSort(int a[], int len) {
+    int minIndex = 0;
+    
+}
+
+----------------Memory Area----------------
